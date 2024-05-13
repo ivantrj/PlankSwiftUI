@@ -8,14 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var viewModel = PlankChallengeViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            PlankTabView(viewModel: viewModel)
+                .tabItem {
+                    Label("Plank", systemImage: "square.and.arrow.up")
+                }
+            HistoryTabView(viewModel: viewModel)
+                .tabItem {
+                    Label("History", systemImage: "calendar")
+                }
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
         }
-        .padding()
     }
 }
 

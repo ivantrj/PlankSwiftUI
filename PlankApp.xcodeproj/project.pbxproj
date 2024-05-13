@@ -11,6 +11,11 @@
 		7DC7D15C2BF2957B0058FB63 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7D15B2BF2957B0058FB63 /* ContentView.swift */; };
 		7DC7D15E2BF2957E0058FB63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DC7D15D2BF2957E0058FB63 /* Assets.xcassets */; };
 		7DC7D1612BF2957E0058FB63 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DC7D1602BF2957E0058FB63 /* Preview Assets.xcassets */; };
+		7DC7D1682BF295BC0058FB63 /* PlankViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7D1672BF295BC0058FB63 /* PlankViewModel.swift */; };
+		7DC7D16A2BF295F60058FB63 /* PlankTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7D1692BF295F60058FB63 /* PlankTabView.swift */; };
+		7DC7D16C2BF2961B0058FB63 /* HistoryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7D16B2BF2961B0058FB63 /* HistoryTabView.swift */; };
+		7DC7D16E2BF296380058FB63 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7D16D2BF296380058FB63 /* SettingsView.swift */; };
+		7DC7D1702BF2971D0058FB63 /* ConfettiCannon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7D16F2BF2971D0058FB63 /* ConfettiCannon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,11 @@
 		7DC7D15B2BF2957B0058FB63 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7DC7D15D2BF2957E0058FB63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7DC7D1602BF2957E0058FB63 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7DC7D1672BF295BC0058FB63 /* PlankViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankViewModel.swift; sourceTree = "<group>"; };
+		7DC7D1692BF295F60058FB63 /* PlankTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankTabView.swift; sourceTree = "<group>"; };
+		7DC7D16B2BF2961B0058FB63 /* HistoryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTabView.swift; sourceTree = "<group>"; };
+		7DC7D16D2BF296380058FB63 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7DC7D16F2BF2971D0058FB63 /* ConfettiCannon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiCannon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +63,11 @@
 			children = (
 				7DC7D1592BF2957B0058FB63 /* PlankAppApp.swift */,
 				7DC7D15B2BF2957B0058FB63 /* ContentView.swift */,
+				7DC7D1672BF295BC0058FB63 /* PlankViewModel.swift */,
+				7DC7D1692BF295F60058FB63 /* PlankTabView.swift */,
+				7DC7D16B2BF2961B0058FB63 /* HistoryTabView.swift */,
+				7DC7D16D2BF296380058FB63 /* SettingsView.swift */,
+				7DC7D16F2BF2971D0058FB63 /* ConfettiCannon.swift */,
 				7DC7D15D2BF2957E0058FB63 /* Assets.xcassets */,
 				7DC7D15F2BF2957E0058FB63 /* Preview Content */,
 			);
@@ -137,8 +152,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DC7D1682BF295BC0058FB63 /* PlankViewModel.swift in Sources */,
+				7DC7D16A2BF295F60058FB63 /* PlankTabView.swift in Sources */,
 				7DC7D15C2BF2957B0058FB63 /* ContentView.swift in Sources */,
+				7DC7D1702BF2971D0058FB63 /* ConfettiCannon.swift in Sources */,
+				7DC7D16E2BF296380058FB63 /* SettingsView.swift in Sources */,
 				7DC7D15A2BF2957B0058FB63 /* PlankAppApp.swift in Sources */,
+				7DC7D16C2BF2961B0058FB63 /* HistoryTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
