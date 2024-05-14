@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import Combine
 
 struct PlankTabView: View {
-    @ObservedObject var viewModel: PlankChallengeViewModel
+    @StateObject private var viewModel = PlankChallengeViewModel()
     
     var body: some View {
         VStack {
@@ -16,7 +17,7 @@ struct PlankTabView: View {
                 PlankCountdownView(viewModel: viewModel)
             } else {
                 Button(action: {
-                    viewModel.startPlankChallenge()
+                    viewModel.startChallenge()
                 }) {
                     Text("Start 30 day challenge day \(viewModel.currentDay)")
                 }
@@ -28,7 +29,6 @@ struct PlankTabView: View {
     }
 }
 
-
 struct PlankCountdownView: View {
     @ObservedObject var viewModel: PlankChallengeViewModel
     @State private var showConfetti: Bool = false
@@ -38,17 +38,11 @@ struct PlankCountdownView: View {
             if viewModel.secondsRemaining > 0 {
                 Text("\(viewModel.secondsRemaining)")
                     .font(.largeTitle)
-                    .onAppear {
-                        viewModel.startPlankChallenge()
-                    }
             } else {
                 ConfettiView(isShowing: $showConfetti)
                     .onAppear {
                         showConfetti = true
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            viewModel.isPlankInProgress = false
-                            showConfetti = false
-                        }
+                        viewModel.completeChallenge()
                     }
             }
         }
@@ -64,16 +58,9 @@ struct ConfettiView: View {
                 Rectangle()
                     .fill(Color.clear)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(
-                        ConfettiCannon()
-                    )
+                    .background(ConfettiCannon())
             }
         }
         .edgesIgnoringSafeArea(.all)
     }
 }
-
-//
-//#Preview {
-//    PlankTabView()
-//}

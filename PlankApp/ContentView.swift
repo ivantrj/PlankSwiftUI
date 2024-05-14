@@ -12,7 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            PlankTabView(viewModel: viewModel)
+            PlankTabView()
                 .tabItem {
                     Label("Plank", systemImage: "square.and.arrow.up")
                 }

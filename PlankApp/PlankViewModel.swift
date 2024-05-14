@@ -9,47 +9,55 @@ import Foundation
 import Combine
 import SwiftUI
 
-import SwiftUI
+import Foundation
 import Combine
 
 class PlankChallengeViewModel: ObservableObject {
     @Published var currentDay: Int = 1
     @Published var secondsRemaining: Int = 30
     @Published var isPlankInProgress: Bool = false
-    @Published var history: [Bool] = Array(repeating: false, count: 30)
+    @Published private(set) var history: [Bool] = []
     
-    var startDate: Date = Date() 
-    
-    var timer: Timer?
-    var cancellable: AnyCancellable?
+    private var startDate: Date = Date()
+    private var timer: Timer?
+    private var cancellable: AnyCancellable?
     
     init() {
-        self.cancellable = $currentDay.sink { day in
-            self.secondsRemaining = 30 + (day - 1) * 5
-        }
+        cancellable = $currentDay
+            .sink { [weak self] day in
+                guard let self = self else { return }
+                self.secondsRemaining = 30 + (day - 1) * 5
+            }
     }
     
-    func startPlankChallenge() {
+    func startChallenge() {
         isPlankInProgress = true
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
             if self.secondsRemaining > 0 {
                 self.secondsRemaining -= 1
             } else {
-                self.isPlankInProgress = false
-                self.timer?.invalidate()
-                self.history[self.currentDay - 1] = true
+                self.completeChallenge()
             }
         }
+    }
+    
+    func completeChallenge() {
+        isPlankInProgress = false
+        timer?.invalidate()
+        timer = nil
+        history.append(true)
+        currentDay = min(currentDay + 1, 30)
     }
     
     func updateCurrentDayIfNeeded() {
         let currentDate = Date()
         let calendar = Calendar.current
-        if let days = calendar.dateComponents([.day], from: startDate, to: currentDate).day {
-            if days >= 1 {
-                currentDay += days
-                startDate = currentDate
-            }
+        if let days = calendar.dateComponents([.day], from: startDate, to: currentDate).day,
+           days > 0 {
+            currentDay = min(currentDay + days, 30)
+            startDate = currentDate
+            history = Array(repeating: false, count: currentDay - 1)
         }
     }
 }
