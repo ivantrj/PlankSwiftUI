@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct HistoryTabView: View {
-    @ObservedObject var viewModel: PlankChallengeViewModel
+struct HistoryView: View {
+    @ObservedObject var viewModel: PlankViewModel
     @Environment(\.calendar) private var calendar
 
     private var weekdaySymbols: [String] {

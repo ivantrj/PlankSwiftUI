@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct PlankAppApp: App {
+struct PlankApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

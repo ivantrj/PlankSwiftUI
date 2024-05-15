@@ -8,8 +8,8 @@
 import SwiftUI
 import Combine
 
-struct PlankTabView: View {
-    @StateObject private var viewModel = PlankChallengeViewModel()
+struct PlankView: View {
+    @StateObject private var viewModel = PlankViewModel()
 
     var body: some View {
         VStack {
@@ -30,7 +30,7 @@ struct PlankTabView: View {
 }
 
 struct PlankCountdownRingView: View {
-    @ObservedObject var viewModel: PlankChallengeViewModel
+    @ObservedObject var viewModel: PlankViewModel
     
     let timer = Timer
         .publish(every: 1, on: .main, in: .common)

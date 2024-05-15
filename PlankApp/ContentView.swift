@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var viewModel = PlankChallengeViewModel()
+    @StateObject var viewModel = PlankViewModel()
     
     var body: some View {
         TabView {
-            PlankTabView()
+            PlankView()
                 .tabItem {
                     Label("Plank", systemImage: "square.and.arrow.up")
                 }
-            HistoryTabView(viewModel: viewModel)
+            HistoryView(viewModel: viewModel)
                 .tabItem {
                     Label("History", systemImage: "calendar")
                 }

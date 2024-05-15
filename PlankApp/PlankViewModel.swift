@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import SwiftUI
 
-class PlankChallengeViewModel: ObservableObject {
+class PlankViewModel: ObservableObject {
     @Published var currentDay: Int = 1
     @Published var secondsRemaining: Int = 30
     @Published var isPlankInProgress: Bool = false
