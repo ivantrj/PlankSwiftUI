@@ -9,14 +9,12 @@ import Foundation
 import Combine
 import SwiftUI
 
-import Foundation
-import Combine
-
 class PlankChallengeViewModel: ObservableObject {
     @Published var currentDay: Int = 1
     @Published var secondsRemaining: Int = 30
     @Published var isPlankInProgress: Bool = false
     @Published private(set) var history: [Bool] = []
+    @Published var initialDuration: Int = 30 // Initial duration in seconds
     
     private var startDate: Date = Date()
     private var timer: Timer?
@@ -26,7 +24,8 @@ class PlankChallengeViewModel: ObservableObject {
         cancellable = $currentDay
             .sink { [weak self] day in
                 guard let self = self else { return }
-                self.secondsRemaining = 30 + (day - 1) * 5
+                self.initialDuration = 30 + (day - 1) * 5
+                self.secondsRemaining = self.initialDuration
             }
     }
     
@@ -48,6 +47,21 @@ class PlankChallengeViewModel: ObservableObject {
         timer = nil
         history.append(true)
         currentDay = min(currentDay + 1, 30)
+    }
+    
+    func cancelChallenge() {
+        isPlankInProgress = false
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    func updateTimer() {
+        if isPlankInProgress && secondsRemaining > 0 {
+            secondsRemaining -= 1
+            if secondsRemaining == 0 {
+                completeChallenge()
+            }
+        }
     }
     
     func updateCurrentDayIfNeeded() {

@@ -7,31 +7,29 @@
 
 import SwiftUI
 
-
 struct HistoryTabView: View {
     @ObservedObject var viewModel: PlankChallengeViewModel
-    
     @Environment(\.calendar) private var calendar
-    
+
     private var weekdaySymbols: [String] {
         return calendar.veryShortWeekdaySymbols
     }
-    
+
     private let daysInMonth: [Int] = Array(1...31)
-    
+
     private var startDate: Date {
         let components = DateComponents(year: 2023, month: 5, day: 1)
         return calendar.date(from: components) ?? Date()
     }
-    
+
     var body: some View {
         VStack {
             Text("History")
                 .font(.title)
                 .padding()
-            
+
             Spacer()
-            
+
             ScrollView {
                 VStack(spacing: 8) {
                     HStack {
@@ -40,26 +38,25 @@ struct HistoryTabView: View {
                                 .frame(maxWidth: .infinity)
                         }
                     }
-                    
-                    let currentMonth = Calendar.current.component(.month, from: startDate)
-                    let currentYear = Calendar.current.component(.year, from: startDate)
-                    
-                    ForEach(daysInMonth, id: \.self) { day in
-                        let dayIndex = viewModel.history.count - (31 - day) - 1
-                        let isCompleted = dayIndex >= 0 && dayIndex < viewModel.history.count && viewModel.history[dayIndex]
-                        
-                        DayView(day: day, isCompleted: isCompleted)
+
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 8) {
+                        ForEach(daysInMonth, id: \.self) { day in
+                            let dayIndex = viewModel.history.count - (31 - day) - 1
+                            let isCompleted = dayIndex >= 0 && dayIndex < viewModel.history.count && viewModel.history[dayIndex]
+
+                            DayView(day: day, isCompleted: isCompleted)
+                        }
                     }
                 }
                 .padding()
             }
         }
     }
-    
+
     struct DayView: View {
         let day: Int
         let isCompleted: Bool
-        
+
         var body: some View {
             Text("\(day)")
                 .frame(width: 30, height: 30)
@@ -69,7 +66,3 @@ struct HistoryTabView: View {
         }
     }
 }
-
-//#Preview {
-//    HistoryTabView()
-//}
