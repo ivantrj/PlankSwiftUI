@@ -10,15 +10,32 @@ import Combine
 import SwiftUI
 
 class PlankViewModel: ObservableObject {
-    @Published var currentDay: Int = 1
+    @Published var currentDay: Int = 1 {
+        didSet {
+            saveCurrentDay()
+        }
+    }
     @Published var secondsRemaining: Int = 30
     @Published var isPlankInProgress: Bool = false
-    @Published private(set) var history: [Bool] = []
-    @Published var initialDuration: Int = 30 // Initial duration in seconds
+    @Published private(set) var history: [Bool] = [] {
+        didSet {
+            saveHistory()
+        }
+    }
+    @Published var initialDuration: Int = 30 {
+        didSet {
+            saveInitialDuration()
+        }
+    }
     
     private var startDate: Date = Date()
     private var timer: Timer?
     private var cancellable: AnyCancellable?
+    
+    private let userDefaults = UserDefaults.standard
+    private let currentDayKey = "CurrentDay"
+    private let historyKey = "History"
+    private let initialDurationKey = "InitialDuration"
     
     init() {
         cancellable = $currentDay
@@ -27,6 +44,10 @@ class PlankViewModel: ObservableObject {
                 self.initialDuration = 30 + (day - 1) * 5
                 self.secondsRemaining = self.initialDuration
             }
+        
+        loadCurrentDay()
+        loadHistory()
+        loadInitialDuration()
     }
     
     func startChallenge() {
@@ -72,6 +93,36 @@ class PlankViewModel: ObservableObject {
             currentDay = min(currentDay + days, 30)
             startDate = currentDate
             history = Array(repeating: false, count: currentDay - 1)
+        }
+    }
+    
+    private func saveCurrentDay() {
+        userDefaults.set(currentDay, forKey: currentDayKey)
+    }
+    
+    private func loadCurrentDay() {
+        if let savedCurrentDay = userDefaults.object(forKey: currentDayKey) as? Int {
+            currentDay = savedCurrentDay
+        }
+    }
+    
+    private func saveHistory() {
+        userDefaults.set(history, forKey: historyKey)
+    }
+    
+    private func loadHistory() {
+        if let savedHistory = userDefaults.object(forKey: historyKey) as? [Bool] {
+            history = savedHistory
+        }
+    }
+    
+    private func saveInitialDuration() {
+        userDefaults.set(initialDuration, forKey: initialDurationKey)
+    }
+    
+    private func loadInitialDuration() {
+        if let savedInitialDuration = userDefaults.object(forKey: initialDurationKey) as? Int {
+            initialDuration = savedInitialDuration
         }
     }
 }
