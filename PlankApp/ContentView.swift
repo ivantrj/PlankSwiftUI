@@ -14,7 +14,7 @@ struct ContentView: View {
         TabView {
             PlankView()
                 .tabItem {
-                    Label("Plank", systemImage: "square.and.arrow.up")
+                    Label("Start", systemImage: "house.fill")
                 }
             HistoryView(viewModel: viewModel)
                 .tabItem {
