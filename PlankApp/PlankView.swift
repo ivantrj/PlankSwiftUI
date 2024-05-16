@@ -10,6 +10,7 @@ import Combine
 
 struct PlankView: View {
     @StateObject private var viewModel = PlankViewModel()
+    @State private var showingReadyTimer = false
     
     var body: some View {
         VStack {
@@ -17,14 +18,69 @@ struct PlankView: View {
                 PlankCountdownRingView(viewModel: viewModel)
             } else {
                 Button(action: {
-                    viewModel.startChallenge()
+                    showingReadyTimer = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                        viewModel.startChallenge()
+                    }
                 }) {
-                    Text("Start 30 day challenge day \(viewModel.currentDay)")
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Start Plank Challenge")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                            
+                            Text("Day \(viewModel.currentDay)/30")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        Spacer()
+                        
+                        Image(systemName: "chevron.right.circle.fill")
+                            .foregroundColor(.green)
+                    }
+                    .padding()
+                    .background(Color.green.opacity(0.2))
+                    .cornerRadius(10)
+                }
+                .padding()
+                .sheet(isPresented: $showingReadyTimer) {
+                    ReadyTimerView()
                 }
             }
         }
+        .padding()
         .onAppear {
             viewModel.updateCurrentDayIfNeeded()
+        }
+    }
+}
+
+struct ReadyTimerView: View {
+    @State private var timeRemaining = 5
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    var body: some View {
+        VStack {
+            Text("Get Ready for Plank")
+                .font(.title)
+                .padding()
+            
+            Text("Time Remaining: \(timeRemaining)")
+                .font(.largeTitle)
+                .padding()
+            
+            Text("1. Lie face down on the floor, resting on your forearms and toes.\n2. Keep your body in a straight line from head to heels.\n3. Engage your core muscles by tightening your abdominal muscles.\n4. Hold this position until the countdown finishes.")
+                .multilineTextAlignment(.center)
+                .padding()
+        }
+        .onReceive(timer) { _ in
+            if timeRemaining > 0 {
+                timeRemaining -= 1
+            }
+        }
+        .onDisappear {
+            timer.upstream.connect().cancel()
         }
     }
 }
