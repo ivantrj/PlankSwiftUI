@@ -31,12 +31,12 @@ struct AboutAuthorView: View {
                 .padding(16)
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
-//                        Asset.Images.author.swiftUIImage
-//                            .resizable()
-//                            .scaledToFill()
-//                            .frame(width: 150, height: 150)
-//                            .clipShape(Circle())
-//                            .overlay(Circle().stroke(Color.black, lineWidth: 2))
+                        Image("author")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 150, height: 150)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.black, lineWidth: 2))
                         Text("Hi, I am Ivan, the developer of this app.")
                             .font(.title2)
                             .fontWeight(.bold)
@@ -45,32 +45,32 @@ struct AboutAuthorView: View {
                             .foregroundColor(Color(uiColor: .label))
                         HStack(spacing: 16) {
                             Spacer()
-//                            Button {
-//                                guard let instagramUrl = URL(string: Constants.instagram) else { return }
-//                                openUrl(instagramUrl)
-//                            } label: {
-//                                Asset.Images.instagram.swiftUIImage
-//                            }
-//                            Button {
-//                                guard let twitterUrl = URL(string: Constants.twitter) else { return }
-//                                openUrl(twitterUrl)
-//                            } label: {
-//                                Asset.Images.twitterColor.swiftUIImage
-//                            }
-//                            Button {
-//                                guard let twitchUrl = URL(string: Constants.twitch) else { return }
-//                                openUrl(twitchUrl)
-//                            } label: {
-//                                Asset.Images.twitch.swiftUIImage
-//                            }
-//                            Button {
-//                                guard let instagramUrl = URL(string: "mailto:\(Constants.supportEmail)") else { return }
-//                                openUrl(instagramUrl)
-//                            } label: {
-//                                Image(systemName: "envelope")
-//                                    .font(.system(size: 48, weight: .medium))
-//                                    .foregroundColor(Color(uiColor: .label))
-//                            }
+                            Button {
+                                guard let instagramUrl = URL(string: Constants.instagram) else { return }
+                                openUrl(instagramUrl)
+                            } label: {
+                                Image("instagram")
+                            }
+                            Button {
+                                guard let twitterUrl = URL(string: Constants.twitter) else { return }
+                                openUrl(twitterUrl)
+                            } label: {
+                                Image("twitter_color")
+                            }
+                            Button {
+                                guard let twitchUrl = URL(string: Constants.twitch) else { return }
+                                openUrl(twitchUrl)
+                            } label: {
+                                Image("twitch")
+                            }
+                            Button {
+                                guard let instagramUrl = URL(string: "mailto:\(Constants.supportEmail)") else { return }
+                                openUrl(instagramUrl)
+                            } label: {
+                                Image(systemName: "envelope")
+                                    .font(.system(size: 48, weight: .medium))
+                                    .foregroundColor(Color(uiColor: .label))
+                            }
                             Spacer()
                         }
                     }

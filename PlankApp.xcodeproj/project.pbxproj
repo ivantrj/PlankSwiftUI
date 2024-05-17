@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C1CC6402BF72F26009EC563 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1CC63F2BF72F26009EC563 /* Constants.swift */; };
 		2C5EC80E2BF5DAFC00085BC3 /* AboutAuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EC80D2BF5DAFC00085BC3 /* AboutAuthorView.swift */; };
 		7DC7D15A2BF2957B0058FB63 /* PlankApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7D1592BF2957B0058FB63 /* PlankApp.swift */; };
 		7DC7D15C2BF2957B0058FB63 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7D15B2BF2957B0058FB63 /* ContentView.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C1CC63F2BF72F26009EC563 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2C5EC80D2BF5DAFC00085BC3 /* AboutAuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAuthorView.swift; sourceTree = "<group>"; };
 		7DC7D1562BF2957B0058FB63 /* PlankApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlankApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DC7D1592BF2957B0058FB63 /* PlankApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankApp.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				7DC7D16B2BF2961B0058FB63 /* HistoryView.swift */,
 				7DC7D16D2BF296380058FB63 /* SettingsView.swift */,
 				2C5EC80D2BF5DAFC00085BC3 /* AboutAuthorView.swift */,
+				2C1CC63F2BF72F26009EC563 /* Constants.swift */,
 				7DC7D15D2BF2957E0058FB63 /* Assets.xcassets */,
 				7DC7D15F2BF2957E0058FB63 /* Preview Content */,
 			);
@@ -159,6 +162,7 @@
 				7DC7D15A2BF2957B0058FB63 /* PlankApp.swift in Sources */,
 				2C5EC80E2BF5DAFC00085BC3 /* AboutAuthorView.swift in Sources */,
 				7DC7D16C2BF2961B0058FB63 /* HistoryView.swift in Sources */,
+				2C1CC6402BF72F26009EC563 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
