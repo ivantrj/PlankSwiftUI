@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2C1CC6402BF72F26009EC563 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1CC63F2BF72F26009EC563 /* Constants.swift */; };
 		2C5EC80E2BF5DAFC00085BC3 /* AboutAuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EC80D2BF5DAFC00085BC3 /* AboutAuthorView.swift */; };
+		2C6E2AFB2BFCCB680030D4D0 /* CountdownRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E2AFA2BFCCB680030D4D0 /* CountdownRingView.swift */; };
+		2C6E2AFD2BFCCBB10030D4D0 /* ReadyTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E2AFC2BFCCBB10030D4D0 /* ReadyTimerView.swift */; };
 		7DC7D15A2BF2957B0058FB63 /* PlankApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7D1592BF2957B0058FB63 /* PlankApp.swift */; };
 		7DC7D15C2BF2957B0058FB63 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7D15B2BF2957B0058FB63 /* ContentView.swift */; };
 		7DC7D15E2BF2957E0058FB63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DC7D15D2BF2957E0058FB63 /* Assets.xcassets */; };
@@ -22,6 +24,8 @@
 /* Begin PBXFileReference section */
 		2C1CC63F2BF72F26009EC563 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2C5EC80D2BF5DAFC00085BC3 /* AboutAuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAuthorView.swift; sourceTree = "<group>"; };
+		2C6E2AFA2BFCCB680030D4D0 /* CountdownRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownRingView.swift; sourceTree = "<group>"; };
+		2C6E2AFC2BFCCBB10030D4D0 /* ReadyTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyTimerView.swift; sourceTree = "<group>"; };
 		7DC7D1562BF2957B0058FB63 /* PlankApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlankApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DC7D1592BF2957B0058FB63 /* PlankApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankApp.swift; sourceTree = "<group>"; };
 		7DC7D15B2BF2957B0058FB63 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +48,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C6E2AFE2BFCCBD50030D4D0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7DC7D15B2BF2957B0058FB63 /* ContentView.swift */,
+				7DC7D1692BF295F60058FB63 /* PlankView.swift */,
+				2C6E2AFC2BFCCBB10030D4D0 /* ReadyTimerView.swift */,
+				2C6E2AFA2BFCCB680030D4D0 /* CountdownRingView.swift */,
+				7DC7D16B2BF2961B0058FB63 /* HistoryView.swift */,
+				7DC7D16D2BF296380058FB63 /* SettingsView.swift */,
+				2C5EC80D2BF5DAFC00085BC3 /* AboutAuthorView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		7DC7D14D2BF2957B0058FB63 = {
 			isa = PBXGroup;
 			children = (
@@ -64,12 +82,8 @@
 			isa = PBXGroup;
 			children = (
 				7DC7D1592BF2957B0058FB63 /* PlankApp.swift */,
-				7DC7D15B2BF2957B0058FB63 /* ContentView.swift */,
 				7DC7D1672BF295BC0058FB63 /* PlankViewModel.swift */,
-				7DC7D1692BF295F60058FB63 /* PlankView.swift */,
-				7DC7D16B2BF2961B0058FB63 /* HistoryView.swift */,
-				7DC7D16D2BF296380058FB63 /* SettingsView.swift */,
-				2C5EC80D2BF5DAFC00085BC3 /* AboutAuthorView.swift */,
+				2C6E2AFE2BFCCBD50030D4D0 /* Views */,
 				2C1CC63F2BF72F26009EC563 /* Constants.swift */,
 				7DC7D15D2BF2957E0058FB63 /* Assets.xcassets */,
 				7DC7D15F2BF2957E0058FB63 /* Preview Content */,
@@ -155,9 +169,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C6E2AFD2BFCCBB10030D4D0 /* ReadyTimerView.swift in Sources */,
 				7DC7D1682BF295BC0058FB63 /* PlankViewModel.swift in Sources */,
 				7DC7D16A2BF295F60058FB63 /* PlankView.swift in Sources */,
 				7DC7D15C2BF2957B0058FB63 /* ContentView.swift in Sources */,
+				2C6E2AFB2BFCCB680030D4D0 /* CountdownRingView.swift in Sources */,
 				7DC7D16E2BF296380058FB63 /* SettingsView.swift in Sources */,
 				7DC7D15A2BF2957B0058FB63 /* PlankApp.swift in Sources */,
 				2C5EC80E2BF5DAFC00085BC3 /* AboutAuthorView.swift in Sources */,
