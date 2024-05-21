@@ -11,47 +11,61 @@ import Combine
 struct PlankView: View {
     @StateObject private var viewModel = PlankViewModel()
     @State private var showingReadyTimer = false
-    
+    @State private var animateButton = false
+
     var body: some View {
-        VStack {
-            if viewModel.isPlankInProgress {
-                PlankCountdownRingView(viewModel: viewModel)
-            } else {
-                Button(action: {
-                    showingReadyTimer = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                        viewModel.startChallenge()
-                    }
-                }) {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Start Plank Challenge")
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.6588235497, green: 0.5607843399, blue: 0.9764706349, alpha: 1)), Color(#colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                .edgesIgnoringSafeArea(.top)
+
+
+            VStack(spacing: 20) {
+                if viewModel.isPlankInProgress {
+                    PlankCountdownRingView(viewModel: viewModel)
+                } else {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Plank Challenge")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+
+                        Text("Day \(viewModel.currentDay)/30")
+                            .font(.title2)
+                            .foregroundColor(.white)
+
+                        Button(action: {
+                            showingReadyTimer = true
+                            animateButton = true
+
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                viewModel.startChallenge()
+                            }
+                        }) {
+                            Text("Start Plank")
                                 .font(.title2)
                                 .fontWeight(.semibold)
-                            
-                            Text("Day \(viewModel.currentDay)/30")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 30)
+                                .padding(.vertical, 15)
+                                .background(
+                                    Capsule()
+                                        .fill(Color(#colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)))
+                                        .shadow(radius: 5)
+                                        .scaleEffect(animateButton ? 1.1 : 1.0)
+                                        .animation(.easeInOut(duration: 0.5).repeatForever(autoreverses: true), value: animateButton)
+                                )
                         }
-                        
-                        Spacer()
-                        
-                        Image(systemName: "chevron.right.circle.fill")
-                            .foregroundColor(.green)
                     }
                     .padding()
-                    .background(Color.green.opacity(0.2))
-                    .cornerRadius(10)
-                }
-                .padding()
-                .sheet(isPresented: $showingReadyTimer) {
-                    ReadyTimerView()
                 }
             }
-        }
-        .padding()
-        .onAppear {
-            viewModel.updateCurrentDayIfNeeded()
+            .padding()
+            .sheet(isPresented: $showingReadyTimer) {
+                ReadyTimerView()
+            }
+            .onAppear {
+                viewModel.updateCurrentDayIfNeeded()
+            }
         }
     }
 }
@@ -59,12 +73,13 @@ struct PlankView: View {
 struct ReadyTimerView: View {
     @State private var timeRemaining = 5
     @State private var isAnimating = false
+    @Environment(\.presentationMode) var presentationMode
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.6588235497, green: 0.5607843399, blue: 0.9764706349, alpha: 1)), Color(#colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 20) {
@@ -94,6 +109,8 @@ struct ReadyTimerView: View {
                 if timeRemaining > 0 {
                     timeRemaining -= 1
                     isAnimating = true
+                } else {
+                    presentationMode.wrappedValue.dismiss()
                 }
             }
             .onAppear {
@@ -114,59 +131,70 @@ struct PlankCountdownRingView: View {
         .autoconnect()
     
     var body: some View {
-        VStack {
-            ZStack {
-                // Placeholder Ring
-                Circle()
-                    .stroke(lineWidth: 20)
-                    .foregroundColor(.gray)
-                    .opacity(0.1)
-                
-                // Colored Ring
-                Circle()
-                    .trim(from: 0.0, to: CGFloat(1 - (Double(viewModel.secondsRemaining) / Double(viewModel.initialDuration))))
-                    .stroke(AngularGradient(gradient: Gradient(colors: [Color.purple, Color.pink, Color.purple]), center: .center), style: StrokeStyle(lineWidth: 15.0, lineCap: .round, lineJoin: .round))
-                    .rotationEffect(Angle(degrees: 270))
-                    .animation(.easeInOut(duration: 1.0), value: viewModel.secondsRemaining)
-                
-                VStack(spacing: 30) {
-                    Text("\(viewModel.secondsRemaining)")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.6588235497, green: 0.5607843399, blue: 0.9764706349, alpha: 1)), Color(#colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack(spacing: 20) {
+                ZStack {
+                    Circle()
+                        .stroke(lineWidth: 20)
+                        .foregroundColor(.white.opacity(0.3))
                     
-                    if viewModel.secondsRemaining <= 0 {
-                        Button(action: {
-                            viewModel.completeChallenge()
-                        }) {
-                            Text("Complete Challenge")
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.green)
-                                .cornerRadius(10)
-                        }
+                    Circle()
+                        .trim(from: 0.0, to: CGFloat(1 - (Double(viewModel.secondsRemaining) / Double(viewModel.initialDuration))))
+                        .stroke(AngularGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.7764705882, green: 0.3137254902, blue: 0.9686274510, alpha: 1)), Color(#colorLiteral(red: 0.9568627451, green: 0.2941176471, blue: 0.6588235294, alpha: 1))]), center: .center, startAngle: Angle(degrees: 90), endAngle: Angle(degrees: 450)), style: StrokeStyle(lineWidth: 15.0, lineCap: .round, lineJoin: .round))
+                        .rotationEffect(Angle(degrees: 270))
+                        .animation(.easeInOut(duration: 1.0), value: viewModel.secondsRemaining)
+                    
+                    Text("\(viewModel.secondsRemaining)")
+                        .font(.system(size: 60, weight: .bold, design: .rounded))
+                        .foregroundColor(.white)
+                        .shadow(radius: 5)
+                }
+                .frame(width: 250, height: 250)
+                .padding()
+                
+                if viewModel.secondsRemaining <= 0 {
+                    Button(action: {
+                        viewModel.completeChallenge()
+                    }) {
+                        Text("Complete Challenge")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 30)
+                            .padding(.vertical, 15)
+                            .background(
+                                Capsule()
+                                    .fill(Color.green)
+                                    .shadow(radius: 5)
+                            )
                     }
                 }
+                
+                Button(action: {
+                    viewModel.cancelChallenge()
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Text("Cancel")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 30)
+                        .padding(.vertical, 15)
+                        .background(
+                            Capsule()
+                                .fill(Color.red)
+                                .shadow(radius: 5)
+                        )
+                }
             }
-            .frame(width: 300, height: 300)
-            .padding()
             .onReceive(timer) { _ in
                 if viewModel.isPlankInProgress {
                     viewModel.updateTimer()
                 }
             }
-            
-            Button(action: {
-                viewModel.cancelChallenge()
-                presentationMode.wrappedValue.dismiss()
-            }, label: {
-                Text("Cancel")
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.red)
-                    .cornerRadius(10)
-                    .shadow(radius: 5)
-            })
-            .padding()
         }
     }
 }
