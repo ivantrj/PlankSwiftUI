@@ -143,7 +143,7 @@ struct PlankCountdownRingView: View {
                     
                     Circle()
                         .trim(from: 0.0, to: CGFloat(1 - (Double(viewModel.secondsRemaining) / Double(viewModel.initialDuration))))
-                        .stroke(AngularGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.7764705882, green: 0.3137254902, blue: 0.9686274510, alpha: 1)), Color(#colorLiteral(red: 0.9568627451, green: 0.2941176471, blue: 0.6588235294, alpha: 1))]), center: .center, startAngle: Angle(degrees: 90), endAngle: Angle(degrees: 450)), style: StrokeStyle(lineWidth: 15.0, lineCap: .round, lineJoin: .round))
+                        .stroke(AngularGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.7764705882, green: 0.3137254902, blue: 0.9686274510, alpha: 1)), Color(#colorLiteral(red: 0.9568627451, green: 0.2941176471, blue: 0.6588235294, alpha: 1)), Color(#colorLiteral(red: 0.7764705882, green: 0.3137254902, blue: 0.9686274510, alpha: 1))]), center: .center), style: StrokeStyle(lineWidth: 15.0, lineCap: .round, lineJoin: .round))
                         .rotationEffect(Angle(degrees: 270))
                         .animation(.easeInOut(duration: 1.0), value: viewModel.secondsRemaining)
                     
