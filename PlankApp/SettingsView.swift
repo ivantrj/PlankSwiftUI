@@ -11,8 +11,8 @@ struct SettingsView: View {
     @AppStorage("isVoiceEnabled") private var isVoiceEnabled = false
     @AppStorage("isHapticFeedbackEnabled") private var isHapticFeedbackEnabled = true
     @State private var showingAboutAuthor = false
-    //    @AppStorage("challengeDuration") private var challengeDuration = 30
-    //    @AppStorage("reminderTime") private var reminderTime = Date()
+    @StateObject private var viewModel = PlankViewModel()
+    @State private var showingResetConfirmation = false
     
     var body: some View {
         NavigationView {
@@ -20,8 +20,18 @@ struct SettingsView: View {
                 Section(header: Text("General")) {
                     Toggle("Voice Guidance", isOn: $isVoiceEnabled)
                         .tint(.accentColor)
+                    
                     Toggle("Haptic Feedback", isOn: $isHapticFeedbackEnabled)
                         .tint(.accentColor)
+                }
+                
+                Section(header: Text("Challenge")) {
+                    Button(action: {
+                        showingResetConfirmation = true
+                    }) {
+                        Text("Reset Challenge")
+                            .foregroundColor(.red)
+                    }
                 }
                 
                 Section(header: Text("About")) {
@@ -29,16 +39,18 @@ struct SettingsView: View {
                         showingAboutAuthor.toggle()
                     }
                 }
-                
-                //                Section(header: Text("Challenge")) {
-                //                    Stepper("Challenge Duration (Days): \(challengeDuration)", value: $challengeDuration, in: 7...90, step: 1)
-                
-                //                    DatePicker("Reminder Time", selection: $reminderTime, displayedComponents: .hourAndMinute)
-                //                }
             }
             .navigationTitle("Settings")
             .sheet(isPresented: $showingAboutAuthor) {
                 AboutAuthorView()
+            }
+            .alert("Reset Challenge", isPresented: $showingResetConfirmation) {
+                Button("Cancel", role: .cancel) {}
+                Button("Reset", role: .destructive) {
+                    viewModel.resetChallenge()
+                }
+            } message: {
+                Text("Are you sure you want to reset the challenge? This will set the current day back to 1.")
             }
         }
     }

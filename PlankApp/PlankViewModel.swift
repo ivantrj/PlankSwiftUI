@@ -125,4 +125,11 @@ class PlankViewModel: ObservableObject {
             initialDuration = savedInitialDuration
         }
     }
+    
+    func resetChallenge() {
+        currentDay = 1
+        history = []
+        saveCurrentDay()
+        saveHistory()
+    }
 }
