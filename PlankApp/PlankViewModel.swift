@@ -138,5 +138,6 @@ class PlankViewModel: ObservableObject {
         history = []
         saveCurrentDay()
         saveHistory()
+        loadHistory()
     }
 }
